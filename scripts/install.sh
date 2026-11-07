@@ -2,12 +2,11 @@
 # TermTracks instant installer for Linux.
 #
 # Run it without downloading anything:
-#   curl -fsSL https://raw.githubusercontent.com/<YOU>/termtracks/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/A7QT/termtracks/main/scripts/install.sh | bash
 #
 # Or as a script:  ./install.sh
-# Override the install source (defaults to PyPI):
-#   TERMTRACKS_SRC="termtracks" bash install.sh                          # PyPI
-#   TERMTRACKS_SRC="git+https://github.com/<YOU>/termtracks" bash install.sh
+# Override the install source (defaults to this GitHub repo):
+#   TERMTRACKS_SRC="termtracks" bash install.sh                          # PyPI (once published)
 
 set -euo pipefail
 
