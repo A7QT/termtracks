@@ -1,6 +1,6 @@
 """Create a clean, platform-neutral friend-sharing ZIP using only the stdlib."""
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 output = root / "dist/termtracks-share.zip"

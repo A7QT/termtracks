@@ -3,19 +3,19 @@ from __future__ import annotations
 
 import argparse
 import os
-from pathlib import Path
 import shlex
 import shutil
 import subprocess
 import sys
 import venv
+from pathlib import Path
 
 
 def add_to_path(bin_dir: Path) -> None:
     if os.name == "nt":
         import ctypes
-        from ctypes import wintypes
         import winreg
+        from ctypes import wintypes
 
         with winreg.CreateKey(winreg.HKEY_CURRENT_USER, "Environment") as key:
             try:
@@ -60,9 +60,11 @@ def add_to_path(bin_dir: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--install-dir", type=Path, help="Override the app directory")
-    parser.add_argument("--no-path", action="store_true", help="Leave shell/PATH settings alone")
+    parser.add_argument("--no-path", action="store_true", help="Don't touch shell/PATH")
     args = parser.parse_args()
-    if sys.version_info < (3, 10):
+    # Kept as a friendly runtime guard: install.py is also run standalone from
+    # the shared bundle, where nothing else enforces the Python minimum.
+    if sys.version_info < (3, 10):  # noqa: UP036
         print("Python 3.10 or newer is required: https://www.python.org/downloads/")
         return 1
     missing = [name for name in ("ffmpeg", "ffplay") if not shutil.which(name)]
@@ -107,7 +109,7 @@ def main() -> int:
             add_to_path(bin_dir)
     except (OSError, subprocess.CalledProcessError) as error:
         print(f"Installation failed: {error}", file=sys.stderr)
-        print("Check your internet connection and Python venv/pip support.", file=sys.stderr)
+        print("Check internet connection and Python venv/pip support.", file=sys.stderr)
         return 1
     print("Installed! Open a new terminal and type: termtracks")
     print(f"You can also launch directly: {launcher}")
