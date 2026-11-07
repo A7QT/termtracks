@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "termtracks"
+version = "0.1.0"
+description = "Terminal music grabber: search YouTube and SoundCloud, save songs to your Music folder"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = [
+    "music",
+    "tui",
+    "textual",
+    "yt-dlp",
+    "termtracks",
+]
+dependencies = [
+    "textual>=1.0.0",
+    "yt-dlp>=2024.1.0",
+    "mutagen>=1.45.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.6.0",
+]
+
+[project.scripts]
+termtracks = "termtracks.tui.app:run"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/termtracks"]
+
+[tool.ruff]
+line-length = 90
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = [
+    "RUF012",  # Textual class attributes (BINDINGS, CSS) are mutable by design
+    "RUF001",  # en dashes are deliberate: they separate artist from title
+]
