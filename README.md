@@ -9,6 +9,12 @@ UI, no library management — just search and harvest.
 Requires Python 3.10+ and FFmpeg (both `ffmpeg` and `ffplay` on your PATH).
 
 ```sh
+curl -fsSL https://raw.githubusercontent.com/A7QT/termtracks/main/scripts/install.sh | bash
+```
+
+Once it's on PyPI this becomes:
+
+```sh
 pipx install termtracks       # recommended
 # or: pip install termtracks
 ```

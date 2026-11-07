@@ -14,8 +14,9 @@ set -euo pipefail
 BIN_DIR="${HOME}/.local/bin"
 VENV_DIR="${HOME}/.local/share/termtracks/venv"
 
-# The pip specifier to install. Default to the published PyPI package.
-SRC="${TERMTRACKS_SRC:-termtracks}"
+# The pip specifier to install. Default: install from the GitHub repo.
+# Flip to "termtracks" (or remove the override) once it's on PyPI.
+SRC="${TERMTRACKS_SRC:-"git+https://github.com/A7QT/termtracks"}"
 
 log()  { printf '\033[1;32m==>\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m==>\033[0m %s\n' "$1"; }
